@@ -1,39 +1,28 @@
+import 'dart:convert';
+
 class PostModel {
-  int _userId;
-  int _id;
-  String _title;
-  String _body;
+  final int userId;
+  final int id;
+  final String title;
+  final String body;
 
-  int get userId => _userId;
-  int get id => _id;
-  String get title => _title;
-  String get body => _body;
+  factory PostModel.fromJson(String str) => PostModel.fromMap(json.decode(str));
 
-  PostModel({
-      int userId, 
-      int id, 
-      String title, 
-      String body}){
-    _userId = userId;
-    _id = id;
-    _title = title;
-    _body = body;
-}
+  String toJson() => json.encode(toMap());
 
-  PostModel.fromJson(dynamic json) {
-    _userId = json["userId"];
-    _id = json["id"];
-    _title = json["title"];
-    _body = json["body"];
-  }
+  PostModel({required this.userId, required this.id, required this.title, required this.body});
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map["userId"] = _userId;
-    map["id"] = _id;
-    map["title"] = _title;
-    map["body"] = _body;
-    return map;
-  }
+  factory PostModel.fromMap(Map<String, dynamic> json) => PostModel(
+        userId: json["userId"],
+        id: json["id"],
+        title: json["title"],
+        body: json["body"],
+      );
 
+  Map<String, dynamic> toMap() => {
+        "userId": userId,
+        "id": id,
+        "title": title,
+        "body": body,
+      };
 }

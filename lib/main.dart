@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
- import 'package:flutter_net_requests_handler/models/post_model.dart';
+import 'package:flutter_net_requests_handler/models/post_model.dart';
 import 'package:flutter_net_requests_handler/models/result_classes.dart';
 import 'package:flutter_net_requests_handler/network_services/posts/posts_service.dart';
-
 
 void main() {
   runApp(MyApp());
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -49,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               loadingState,
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context)?.textTheme.headline4,
             ),
           ],
         ),

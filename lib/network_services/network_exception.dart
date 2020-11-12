@@ -3,11 +3,10 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_net_requests_handler/generated/l10n.dart';
 
-
 String getDioException(error) {
   if (error is Exception) {
     try {
-      String networkExceptions;
+      String networkExceptions = S().unexpectedError;
       if (error is DioError) {
         switch (error.type) {
           case DioErrorType.CANCEL:
@@ -63,10 +62,10 @@ String getDioException(error) {
         networkExceptions = S().unexpectedError;
       }
       return networkExceptions;
-    } on FormatException catch (e) {
+    } on FormatException {
       return S().formatException;
     } catch (_) {
-      return  S().unexpectedError;
+      return S().unexpectedError;
     }
   } else {
     if (error.toString().contains("is not a subtype of")) {

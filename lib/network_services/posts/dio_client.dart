@@ -9,15 +9,15 @@ const _defaultReceiveTimeout = Duration.millisecondsPerMinute;
 class DioClient {
   final String baseUrl;
 
-  Dio _dio;
+  late Dio _dio;
 
-  final List<Interceptor> interceptors;
+  final List<Interceptor>? interceptors;
 
   DioClient(
-      this.baseUrl,
-      Dio dio, {
-        this.interceptors,
-      }) {
+    this.baseUrl,
+    Dio? dio, {
+    this.interceptors,
+  }) {
     _dio = dio ?? Dio();
     _dio
       ..options.baseUrl = baseUrl
@@ -30,22 +30,17 @@ class DioClient {
     }
     if (kDebugMode) {
       _dio.interceptors.add(LogInterceptor(
-          responseBody: true,
-          error: true,
-          requestHeader: false,
-          responseHeader: false,
-          request: false,
-          requestBody: false));
+          responseBody: true, error: true, requestHeader: false, responseHeader: false, request: false, requestBody: false));
     }
   }
 
   Future<dynamic> get(
-      String uri, {
-        Map<String, dynamic> queryParameters,
-        Options options,
-        CancelToken cancelToken,
-        ProgressCallback onReceiveProgress,
-      }) async {
+    String uri, {
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onReceiveProgress,
+  }) async {
     try {
       var response = await _dio.get(
         uri,
@@ -65,14 +60,14 @@ class DioClient {
   }
 
   Future<dynamic> post(
-      String uri, {
-        data,
-        Map<String, dynamic> queryParameters,
-        Options options,
-        CancelToken cancelToken,
-        ProgressCallback onSendProgress,
-        ProgressCallback onReceiveProgress,
-      }) async {
+    String uri, {
+    data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
     try {
       var response = await _dio.post(
         uri,
