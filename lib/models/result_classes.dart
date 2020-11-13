@@ -1,6 +1,6 @@
 abstract class Result<T> {
   factory Result.success(T data) = SuccessState<T>;
-  factory Result.error(String? e) = ErrorState;
+  factory Result.error(String e) = ErrorState<T>;
   factory Result.loading() = LoadingState;
 }
 
@@ -10,7 +10,7 @@ class SuccessState<T> implements Result<T> {
 }
 
 class ErrorState<T> implements Result<T> {
-  final String? errorMessage;
+  final String errorMessage;
   const ErrorState(this.errorMessage);
 }
 
